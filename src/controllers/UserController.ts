@@ -15,7 +15,7 @@ class UserController {
   ): Promise<void> {
     try {
       const users = await this.userService.getUsers();
-      res.status(200).json(users);
+      res.status(200).sendCustomBody(users);
     } catch (error) {
       next(error);
     }
@@ -28,7 +28,7 @@ class UserController {
   ): Promise<void> {
     try {
       const user = await this.userService.createUser(req.body);
-      res.status(201).json(user);
+      res.status(201).sendCustomBody(user);
     } catch (error) {
       next(error);
     }
