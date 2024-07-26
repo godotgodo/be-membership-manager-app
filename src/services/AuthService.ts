@@ -51,6 +51,14 @@ class AuthService {
       throw { message: 'Failed to login', statusCode: 500 };
     }
   }
+
+  public async getUserById(userId: string) {
+    try {
+      return await User.findById(userId).exec();
+    } catch (error) {
+      throw new Error('User lookup failed');
+    }
+  }
 }
 
 export default AuthService;
