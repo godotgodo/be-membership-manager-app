@@ -59,6 +59,8 @@ const userSchema = new Schema<IUser>(
     },
   },
   {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
     methods: {
       // findSimilarTypes(cb) {
       //   return mongoose.model('Animal').find({ type: this.type }, cb);
@@ -66,6 +68,12 @@ const userSchema = new Schema<IUser>(
     },
   },
 );
+
+userSchema.virtual('courses', {
+  ref: 'course',
+  localField: '_id',
+  foreignField: 'members',
+});
 
 userSchema.pre<IUser>('save', function (next) {
   if (
