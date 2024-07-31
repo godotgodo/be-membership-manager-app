@@ -76,13 +76,8 @@ userSchema.virtual('courses', {
 });
 
 userSchema.pre<IUser>('save', function (next) {
-  if (
-    (this.role === 'admin' || this.role === 'moderator') &&
-    (!this.email || !this.password)
-  ) {
-    const err = new Error(
-      'Email and password are required for admin or moderator roles',
-    );
+  if ((this.role === 'admin' || this.role === 'moderator') && (!this.email || !this.password)) {
+    const err = new Error('Email and password are required for admin or moderator roles');
     next(err);
   } else {
     next();

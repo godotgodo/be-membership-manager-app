@@ -24,10 +24,7 @@ class AuthService {
     }
   }
 
-  public async login(
-    email: string,
-    password: string,
-  ): Promise<{ user: IUser; token: string }> {
+  public async login(email: string, password: string): Promise<{ user: IUser; token: string }> {
     try {
       const user = await User.findOne({ email });
 

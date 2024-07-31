@@ -4,8 +4,4 @@ import CourseController from '../controllers/CourseController';
 
 const router = Router();
 
-router.get(
-  '/',
-  AuthController.checkAuth,
-  CourseController.getCoursesBySchoolId,
-);
+router.get('/', AuthController.checkAuth, CourseController.getCoursesBySchoolId);

@@ -7,10 +7,6 @@ declare module 'express-serve-static-core' {
     token?: string;
   }
   interface Response {
-    sendCustomBody: (
-      data: unknown,
-      error?: boolean,
-      message?: string,
-    ) => Response;
+    sendCustomBody: (data: unknown, error?: boolean, message?: string) => Response;
   }
 }

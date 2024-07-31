@@ -12,11 +12,7 @@ class AuthController {
     this.config = getConfig();
   }
 
-  public async register(
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ): Promise<void> {
+  public async register(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const user = await this.authService.register(req.body);
       res.status(201).json(user);
@@ -25,11 +21,7 @@ class AuthController {
     }
   }
 
-  public async login(
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ): Promise<void> {
+  public async login(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const { email, password } = req.body;
       const { user, token } = await this.authService.login(email, password);
@@ -43,11 +35,7 @@ class AuthController {
     }
   }
 
-  public async checkAuth(
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ): Promise<void> {
+  public async checkAuth(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const token = req.headers.authorization?.split(' ')[1];
 

@@ -9,11 +9,7 @@ class SchoolController {
     this.schoolService = new SchoolService();
   }
 
-  public async createSchool(
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ): Promise<void> {
+  public async createSchool(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const userId = req.user._id;
       const school = await this.schoolService.createSchool(userId, req.body);
@@ -23,20 +19,12 @@ class SchoolController {
     }
   }
 
-  public async updateSchool(
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ): Promise<void> {
+  public async updateSchool(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const userId = req.user._id;
       const schoolId = new mongoose.Types.ObjectId(req.params.id);
 
-      const updatedSchool = await this.schoolService.updateSchool(
-        userId,
-        schoolId,
-        req.body,
-      );
+      const updatedSchool = await this.schoolService.updateSchool(userId, schoolId, req.body);
 
       res.status(200).sendCustomBody(updatedSchool);
     } catch (error) {
@@ -44,19 +32,12 @@ class SchoolController {
     }
   }
 
-  public async deleteSchool(
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ): Promise<void> {
+  public async deleteSchool(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const userId = req.user.id;
       const schoolId = new mongoose.Types.ObjectId(req.params.id);
 
-      const deletedSchool = await this.schoolService.deleteSchool(
-        userId,
-        schoolId,
-      );
+      const deletedSchool = await this.schoolService.deleteSchool(userId, schoolId);
 
       res.status(200).sendCustomBody(deletedSchool);
     } catch (error) {
@@ -64,11 +45,7 @@ class SchoolController {
     }
   }
 
-  public async getAll(
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ): Promise<void> {
+  public async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const userId = req.user._id;
       const schools = await this.schoolService.getAll(userId);
@@ -78,11 +55,7 @@ class SchoolController {
     }
   }
 
-  public async getById(
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ): Promise<void> {
+  public async getById(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const userId = req.user._id;
       const schoolId = new mongoose.Types.ObjectId(req.params.id);

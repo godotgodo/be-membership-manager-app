@@ -8,9 +8,7 @@ type userSearchResponse = {
 };
 
 class CourseService {
-  public async getCoursesBySchoolId(
-    schoolId: mongoose.Types.ObjectId,
-  ): Promise<ICourse[]> {
+  public async getCoursesBySchoolId(schoolId: mongoose.Types.ObjectId): Promise<ICourse[]> {
     try {
       const result = await User.aggregate([
         { $match: { 'schools._id': schoolId } },
@@ -65,16 +63,11 @@ class CourseService {
     }
   }
 
-  public async updateCourse(
-    courseId: mongoose.Types.ObjectId,
-    courseInfo: Partial<ICourse>,
-  ) {
+  public async updateCourse(courseId: mongoose.Types.ObjectId, courseInfo: Partial<ICourse>) {
     try {
-      const updatedCourse = await User.findOneAndUpdate(
-        { _id: courseId },
-        courseInfo,
-        { new: true },
-      );
+      const updatedCourse = await User.findOneAndUpdate({ _id: courseId }, courseInfo, {
+        new: true,
+      });
       return updatedCourse;
     } catch (error) {
       throw { message: 'Update course error', statusCode: 500 };

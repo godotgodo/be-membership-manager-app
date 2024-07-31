@@ -40,10 +40,7 @@ class SchoolService {
     }
   }
 
-  public async createSchool(
-    userId: ObjectId,
-    schoolData: ISchool,
-  ): Promise<ISchool> {
+  public async createSchool(userId: ObjectId, schoolData: ISchool): Promise<ISchool> {
     try {
       const updatedUser = await User.findByIdAndUpdate(
         userId,

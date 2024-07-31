@@ -9,11 +9,7 @@ class UserController {
     this.userService = new UserService();
   }
 
-  public async getUsers(
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ): Promise<void> {
+  public async getUsers(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const users = await this.userService.getUsers();
       res.status(200).sendCustomBody(users);
@@ -22,11 +18,7 @@ class UserController {
     }
   }
 
-  public async createUser(
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ): Promise<void> {
+  public async createUser(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const user = await this.userService.createUser(req.body);
       res.status(201).sendCustomBody(user);
