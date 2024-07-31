@@ -1,11 +1,31 @@
-import { Document, model, ObjectId, Schema } from 'mongoose';
+import mongoose, { Document, model, Schema } from 'mongoose';
+
+export interface ILesson extends Document {
+  name: string;
+  date: Date;
+  attendance: mongoose.Types.ObjectId[];
+}
 
 export interface ICourse extends Document {
   name: string;
   teacher: string;
   lessonDate: Date;
-  members: ObjectId[];
+  members: mongoose.Types.ObjectId[];
+  lessons: ILesson[];
 }
+
+const lessonsSchema = new Schema<ILesson>({
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+  attendance: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
+  ],
+});
 
 const courseSchema = new Schema<ICourse>({
   name: {
@@ -28,6 +48,7 @@ const courseSchema = new Schema<ICourse>({
       ref: 'User',
     },
   ],
+  lessons: lessonsSchema,
 });
 
 const Course = model<ICourse>('Course', courseSchema);
